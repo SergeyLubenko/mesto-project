@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mesto</title>
+    <link rel="stylesheet" href="./pages/index.css" />
+  </head>
+  <body class="page">
+    <!-- header start -->
+    <header class="header">
+      <img class="header__logo" src="./images/Vector.svg" alt="Лого" />
+    </header>
+    <!-- Жак-Ив Кусто Исследователь океана -->
+    <!-- header end -->
+    <!-- profile start -->
+    <main>
+      <section class="profile">
+        <div class="profile__user">
+          <img
+            class="profile__avatar"
+            src="./images/avatar.jpg"
+            alt="Фото профиля"
+          />
+          <div class="profile__info">
+            <div class="profile__name">
+              <h1 class="profile__title">Жак-Ив Кусто</h1>
+              <button type="button" class="profile__edit-button"></button>
+            </div>
+            <p class="profile__subtitle">Исследователь океана</p>
+          </div>
+        </div>
+        <button type="button" class="profile__add-button"></button>
+      </section>
+
+      <section class="elements">
+        <ul class="elements__grid">
+          <li class="element">
+            <img
+              class="element__img"
+              src="./images/karachevsk.png"
+              alt="карачевск"
+            />
+            <div class="element__info">
+              <h2 class="element__title">Карачаевск</h2>
+              <button class="element__like" type="button"></button>
+            </div>
+          </li>
+
+          <li class="element">
+            <img class="element__img" src="./images/lbrus.png" alt="Эльбрус" />
+            <div class="element__info">
+              <h2 class="element__title">Гора Эльбрус</h2>
+              <button class="element__like" type="button"></button>
+            </div>
+          </li>
+
+          <li class="element">
+            <img class="element__img" src="./images/dombai.png" alt="Домбай" />
+            <div class="element__info">
+              <h2 class="element__title">Домбай</h2>
+              <button class="element__like" type="button"></button>
+            </div>
+          </li>
+
+          <li class="element">
+            <img
+              class="element__img"
+              src="./images/lbrus2.png"
+              alt="Эльбрус2"
+            />
+            <div class="element__info">
+              <h2 class="element__title">Гора Эльбрус</h2>
+              <button class="element__like" type="button"></button>
+            </div>
+          </li>
+
+          <li class="element">
+            <img
+              class="element__img"
+              src="./images/dombai2.png"
+              alt="Домбай2"
+            />
+            <div class="element__info">
+              <h2 class="element__title">Домбай</h2>
+              <button class="element__like" type="button"></button>
+            </div>
+          </li>
+
+          <li class="element">
+            <img
+              class="element__img"
+              src="./images/karachevsk2.png"
+              alt="Карачевск2"
+            />
+            <div class="element__info">
+              <h2 class="element__title">Карачаево-черкесская республика</h2>
+              <button class="element__like" type="button"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <!-- elements end -->
+    </main>
+    <footer class="footer">
+      <p class="footer__name">&copy; 2023 Сергей Любенко</p>
+    </footer>
+    <section class="popup">
+      <div class="popup__container">
+        <button class="popup__button" type="button"></button>
+        <form class="form" name="PofileForm">
+          <h2 class="form__text">Редактировать профиль</h2>
+          <fieldset class="form__info">
+            <input
+              class="form__input"
+              type="text"
+              name="Username"
+              placeholder="Жак-Ив Кусто"
+            />
+            <input
+              class="form__input"
+              name="search"
+              type="text"
+              placeholder="Исследователь океана"
+            />
+          </fieldset>
+          <button class="form__save-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>

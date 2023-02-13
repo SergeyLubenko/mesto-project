@@ -1,0 +1,10 @@
+.elements {
+  max-width: 880px;
+  margin: 0 auto;
+}
+@media (max-width: 767px) {
+  .elements {
+    row-gap: 20px;
+    max-width: 282px;
+  }
+}
