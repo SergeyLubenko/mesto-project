@@ -34,9 +34,10 @@
         <button type="button" class="profile__add-button"></button>
       </section>
 
-      <section class="elements">
+      <!-- <section> 
         <ul class="elements__grid">
           <li class="element">
+            <button type="button" class="element__delete-button"></button>
             <img
               class="element__img"
               src="./images/karachevsk.png"
@@ -49,6 +50,7 @@
           </li>
 
           <li class="element">
+            <button type="button" class="element__delete-button"></button>
             <img class="element__img" src="./images/lbrus.png" alt="Эльбрус" />
             <div class="element__info">
               <h2 class="element__title">Гора Эльбрус</h2>
@@ -57,6 +59,7 @@
           </li>
 
           <li class="element">
+            <button type="button" class="element__delete-button"></button>
             <img class="element__img" src="./images/dombai.png" alt="Домбай" />
             <div class="element__info">
               <h2 class="element__title">Домбай</h2>
@@ -65,6 +68,7 @@
           </li>
 
           <li class="element">
+            <button type="button" class="element__delete-button"></button>
             <img
               class="element__img"
               src="./images/lbrus2.png"
@@ -77,6 +81,7 @@
           </li>
 
           <li class="element">
+            <button type="button" class="element__delete-button"></button>
             <img
               class="element__img"
               src="./images/dombai2.png"
@@ -89,6 +94,7 @@
           </li>
 
           <li class="element">
+            <button type="button" class="element__delete-button"></button>
             <img
               class="element__img"
               src="./images/karachevsk2.png"
@@ -100,26 +106,46 @@
             </div>
           </li>
         </ul>
-      </section>
+      </section> -->
       <!-- elements end -->
     </main>
+    <ul class="elements__grid"></ul>
     <footer class="footer">
       <p class="footer__name">&copy; 2023 Сергей Любенко</p>
     </footer>
-    <section class="popup">
+
+    <template id="template">
+      <li class="element">
+        <button type="button" class="element__delete-button"></button>
+        <img src="#" alt="Картинка" class="element__img" />
+        <div class="element__info">
+          <h2 class="element__title"></h2>
+          <button type="button" class="element__like"></button>
+        </div>
+      </li>
+    </template>
+
+    <!--Попап редактирования профиля-->
+    <section class="popup" id="edit">
       <div class="popup__container">
-        <button class="popup__button" type="button"></button>
+        <button
+          class="popup__button"
+          id="close-edit"
+          type="button"
+          aria-label="Закрытие"
+        ></button>
+        <h2 class="form__text">Редактировать профиль</h2>
         <form class="form" name="PofileForm">
-          <h2 class="form__text">Редактировать профиль</h2>
-          <fieldset class="form__info">
+          <fieldset class="form__info" id="form-edit">
             <input
-              class="form__input"
+              class="form__input form__input_name"
+              id="forename"
               type="text"
               name="Username"
               placeholder="Жак-Ив Кусто"
             />
             <input
-              class="form__input"
+              class="form__input form__input_search"
               name="search"
               type="text"
               placeholder="Исследователь океана"
@@ -129,5 +155,57 @@
         </form>
       </div>
     </section>
+    <!-- добавляем картинки -->
+    <section class="popup popup_type_card" id="add">
+      <div class="popup__container">
+        <button
+          class="popup__button popup_button_type_close"
+          type="button"
+          id="close-add"
+        ></button>
+        <form class="form" id="form-add" name="PofileForm">
+          <h2 class="form__text">Новое место</h2>
+          <fieldset class="form__info" id="form-add">
+            <input
+              class="form__input form__input_name"
+              id="denomination"
+              type="text"
+              name="Username"
+              placeholder="Название"
+            />
+            <input
+              class="form__input form__input_search"
+              id="link-to-image"
+              name="search"
+              type="text"
+              placeholder="Ссылка на картинку"
+            />
+          </fieldset>
+          <button class="form__save-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
+
+    <!--Попап увеличение изображения-->
+    <div class="popup-image" id="popup-image">
+      <div class="popup-image__container">
+        <button
+          aria-label="Закрытие"
+          type="button"
+          class="popup__button"
+          id="close-image"
+        ></button>
+        <img
+          src="#"
+          alt="Картинка"
+          class="popup-image__picture"
+          id="popup-picture"
+        />
+        <p class="popup-image__text"></p>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+    <script src="./card.js"></script>
   </body>
 </html>

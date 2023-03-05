@@ -9,7 +9,7 @@
 @media screen and (max-width: 1000px) {
   .elements__grid {
     grid-template-columns: repeat(2, 1fr);
-    max-width: 550px;
+    width: 550px;
     margin: 0 auto;
   }
 }
@@ -19,6 +19,16 @@
     grid-template-columns: repeat(1, 1fr);
     gap: 20px;
     max-width: 282px;
-    /* margin: 0 auto; */
+  }
+}
+
+.elements__grid {
+  max-width: 880px;
+  margin: 0 auto;
+}
+@media (max-width: 767px) {
+  .elements__grid {
+    row-gap: 20px;
+    max-width: 282px;
   }
 }
