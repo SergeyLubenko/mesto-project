@@ -128,7 +128,7 @@ const addElementCard = (cards) => {
   // Открываем попав imageZoom+название
 
   const imageZoom = () => {
-    popupImage.classList.add("popup-image_opened");
+    popupImage.classList.add("popup_opened");
     popupImageZoom.src = cards.link;
     popupImageText.textContent = cards.name;
   };
@@ -139,7 +139,7 @@ const addElementCard = (cards) => {
   const closeImage = document.querySelector(".popup-image");
 
   function closePopup() {
-    closeImage.classList.remove("popup-image_opened");
+    closeImage.classList.remove("popup_opened");
   }
   closeImage.addEventListener("click", closePopup);
 
