@@ -109,7 +109,10 @@
       </section> -->
       <!-- elements end -->
     </main>
-    <ul class="elements__grid"></ul>
+    <section>
+      <ul class="elements__grid"></ul>
+    </section>
+
     <footer class="footer">
       <p class="footer__name">&copy; 2023 Сергей Любенко</p>
     </footer>
@@ -130,7 +133,6 @@
       <div class="popup__container">
         <button
           class="popup__button"
-          id="close-edit"
           type="button"
           aria-label="Закрытие"
         ></button>
@@ -165,17 +167,18 @@
         ></button>
         <form class="form" id="form-add" name="PofileForm">
           <h2 class="form__text">Новое место</h2>
-          <fieldset class="form__info" id="form-add">
+          <fieldset class="form__info">
             <input
               class="form__input form__input_name"
-              id="denomination"
+              id="UserName"
               type="text"
               name="Username"
               placeholder="Название"
             />
+
             <input
               class="form__input form__input_search"
-              id="link-to-image"
+              id="linkImg"
               name="search"
               type="text"
               placeholder="Ссылка на картинку"
@@ -190,22 +193,15 @@
     <div class="popup-image" id="popup-image">
       <div class="popup-image__container">
         <button
+          class="popup__button"
           aria-label="Закрытие"
           type="button"
-          class="popup__button"
-          id="close-image"
         ></button>
-        <img
-          src="#"
-          alt="Картинка"
-          class="popup-image__picture"
-          id="popup-picture"
-        />
+        <img class="popup-image__zoom" src="#" alt="Картинка" />
         <p class="popup-image__text"></p>
       </div>
     </div>
 
     <script src="./script.js"></script>
-    <script src="./card.js"></script>
   </body>
 </html>
