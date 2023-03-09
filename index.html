@@ -33,81 +33,6 @@
         </div>
         <button type="button" class="profile__add-button"></button>
       </section>
-
-      <!-- <section> 
-        <ul class="elements__grid">
-          <li class="element">
-            <button type="button" class="element__delete-button"></button>
-            <img
-              class="element__img"
-              src="./images/karachevsk.png"
-              alt="карачевск"
-            />
-            <div class="element__info">
-              <h2 class="element__title">Карачаевск</h2>
-              <button class="element__like" type="button"></button>
-            </div>
-          </li>
-
-          <li class="element">
-            <button type="button" class="element__delete-button"></button>
-            <img class="element__img" src="./images/lbrus.png" alt="Эльбрус" />
-            <div class="element__info">
-              <h2 class="element__title">Гора Эльбрус</h2>
-              <button class="element__like" type="button"></button>
-            </div>
-          </li>
-
-          <li class="element">
-            <button type="button" class="element__delete-button"></button>
-            <img class="element__img" src="./images/dombai.png" alt="Домбай" />
-            <div class="element__info">
-              <h2 class="element__title">Домбай</h2>
-              <button class="element__like" type="button"></button>
-            </div>
-          </li>
-
-          <li class="element">
-            <button type="button" class="element__delete-button"></button>
-            <img
-              class="element__img"
-              src="./images/lbrus2.png"
-              alt="Эльбрус2"
-            />
-            <div class="element__info">
-              <h2 class="element__title">Гора Эльбрус</h2>
-              <button class="element__like" type="button"></button>
-            </div>
-          </li>
-
-          <li class="element">
-            <button type="button" class="element__delete-button"></button>
-            <img
-              class="element__img"
-              src="./images/dombai2.png"
-              alt="Домбай2"
-            />
-            <div class="element__info">
-              <h2 class="element__title">Домбай</h2>
-              <button class="element__like" type="button"></button>
-            </div>
-          </li>
-
-          <li class="element">
-            <button type="button" class="element__delete-button"></button>
-            <img
-              class="element__img"
-              src="./images/karachevsk2.png"
-              alt="Карачевск2"
-            />
-            <div class="element__info">
-              <h2 class="element__title">Карачаево-черкесская республика</h2>
-              <button class="element__like" type="button"></button>
-            </div>
-          </li>
-        </ul>
-      </section> -->
-      <!-- elements end -->
     </main>
     <section>
       <ul class="elements__grid"></ul>
@@ -129,19 +54,19 @@
     </template>
 
     <!--Попап редактирования профиля-->
-    <section class="popup" id="edit">
+    <section class="popup popup_edit">
       <div class="popup__container">
         <button
-          class="popup__button"
+          class="popup__close-icon"
           type="button"
           aria-label="Закрытие"
         ></button>
         <h2 class="form__text">Редактировать профиль</h2>
-        <form class="form" name="PofileForm">
+        <form class="form popup__form" name="PofileForm">
           <fieldset class="form__info" id="form-edit">
             <input
               class="form__input form__input_name"
-              id="forename"
+              id="user-name"
               type="text"
               name="Username"
               placeholder="Жак-Ив Кусто"
@@ -150,6 +75,7 @@
               class="form__input form__input_search"
               name="search"
               type="text"
+              id="user-job"
               placeholder="Исследователь океана"
             />
           </fieldset>
@@ -158,14 +84,10 @@
       </div>
     </section>
     <!-- добавляем картинки -->
-    <section class="popup popup_type_card" id="add">
+    <section class="popup popup_add">
       <div class="popup__container">
-        <button
-          class="popup__button popup_button_type_close"
-          type="button"
-          id="close-add"
-        ></button>
-        <form class="form" id="form-add" name="PofileForm">
+        <button class="popup__close-icon" type="button"></button>
+        <form class="form form-add" name="PofileForm">
           <h2 class="form__text">Новое место</h2>
           <fieldset class="form__info">
             <input
@@ -190,10 +112,10 @@
     </section>
 
     <!--Попап увеличение изображения-->
-    <div class="popup-image" id="popup-image">
+    <div class="popup popup-image">
       <div class="popup-image__container">
         <button
-          class="popup__button"
+          class="popup__close-icon"
           aria-label="Закрытие"
           type="button"
         ></button>
@@ -202,6 +124,6 @@
       </div>
     </div>
 
-    <script src="./script.js"></script>
+    <script src="scripts/script.js"></script>
   </body>
 </html>
