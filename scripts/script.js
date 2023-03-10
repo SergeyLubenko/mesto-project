@@ -15,8 +15,6 @@ const addButton = document.querySelector(".profile__add-button");
 const popupAdd = document.querySelector(".popup_add");
 const closeButton = document.querySelector(".popup__close-icon");
 const closeButtonAdd = popupAdd.querySelector(".popup__close-icon");
-const profileSubmitContent = document.querySelector(".form__save-button");
-const profileFormAdd = popupAdd.querySelector(".form-add");
 
 const name = document.querySelector("#UserName");
 const image = document.querySelector("#linkImg");
@@ -119,20 +117,23 @@ const addElementCard = (cards) => {
     elementLike.classList.toggle("element_like_button-active");
   });
 
-  const deleteCard = newElementCard.querySelector(".element__delete-button");
-  const cardButtonDelete = (event) => {
+  const deleteCardButton = newElementCard.querySelector(
+    ".element__delete-button"
+  );
+  const deleteCard = (event) => {
     event.target.closest(".element").remove();
   };
 
-  deleteCard.addEventListener("click", cardButtonDelete);
+  deleteCardButton.addEventListener("click", deleteCard);
 
   // Открываем попав imageZoom+название
 
   const zoomImage = () => {
-    popupImage.classList.add("popup_opened");
+    // popupImage.classList.add("popup_opened");
     popupImageZoom.src = cards.link;
     popupImageZoom.alt = cards.name;
     popupImageText.textContent = cards.name;
+    openPopup(popupImage);
   };
   newImage.addEventListener("click", zoomImage);
 
