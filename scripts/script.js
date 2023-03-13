@@ -129,7 +129,6 @@ const addElementCard = (cards) => {
   // Открываем попав imageZoom+название
 
   const zoomImage = () => {
-    // popupImage.classList.add("popup_opened");
     popupImageZoom.src = cards.link;
     popupImageZoom.alt = cards.name;
     popupImageText.textContent = cards.name;
