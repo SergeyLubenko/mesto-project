@@ -10,14 +10,34 @@ const formInputSearch = document.querySelector(".form__input_search");
 const profileForm = document.querySelector(".popup__form");
 
 const popupEdit = document.querySelector(".popup_edit");
-const editButton = document.querySelector(".profile__edit-button");
-const addButton = document.querySelector(".profile__add-button");
+
 const popupAdd = document.querySelector(".popup_add");
 const closeButton = document.querySelector(".popup__close-icon");
 const closeButtonAdd = popupAdd.querySelector(".popup__close-icon");
 
-const name = document.querySelector("#UserName");
-const image = document.querySelector("#linkImg");
+const popupProfile = document.querySelector("#popup-profile");
+const popupPicture = document.querySelector("#popup-picture");
+
+const nameProfile = document.getElementById("name");
+const aboutProfile = document.getElementById("about");
+const name = popupPicture.querySelector("#title");
+const image = document.querySelector("#link");
+
+const avatarButton = document.querySelector(".profile__avatar-button");
+const editButton = document.querySelector(".profile__edit-button");
+const addButton = document.querySelector(".profile__add-button");
+
+const popupAvatar = document.querySelector(".popup_avatar");
+const avatarPopup = document.querySelector(".popup_avatar");
+const avatarSubmitButton = document.querySelector(".form__save-button");
+const inputAvatar = document.querySelector(".form__input-avatar");
+const profileAvatar = document.querySelector(".profile__avatar-container");
+
+// открыетие нового аватара
+avatarButton.addEventListener("click", function () {
+  openPopup(popupAvatar);
+  profileAvatar.src = inputAvatar.value;
+});
 
 // функция открыть попап
 function openPopup(popup) {
@@ -45,7 +65,6 @@ function handleProfileFormSubmit(event) {
   profileSubtitle.textContent = formInputSearch.value;
   closePopup(popupEdit);
 }
-profileForm.addEventListener("submit", handleProfileFormSubmit);
 
 addButton.addEventListener("click", function () {
   openPopup(popupAdd);
@@ -53,10 +72,23 @@ addButton.addEventListener("click", function () {
   formInputSearch.value = profileSubtitle.textContent;
 });
 
-//
+profileForm.addEventListener("submit", handleProfileFormSubmit);
 
-//Переменные для попапа добавления карточки
-// const add = document.querySelector("#add");
+// закрытие на еверлайн
+document.addEventListener("click", function (evt) {
+  if (evt.target.classList.remove("popup_opened")) {
+    closePopup(popup);
+  }
+});
+// закрытие нв esc
+document.querySelectorAll(".popup__close-icon").forEach(function (button) {
+  const popup = button.closest(".popup");
+  document.addEventListener("keydown", function (evt) {
+    if (evt.key === "Escape") {
+      closePopup(popup);
+    }
+  });
+});
 
 const initialCards = [
   {
@@ -120,6 +152,7 @@ const addElementCard = (cards) => {
   const deleteCardButton = newElementCard.querySelector(
     ".element__delete-button"
   );
+
   const deleteCard = (event) => {
     event.target.closest(".element").remove();
   };
@@ -134,6 +167,7 @@ const addElementCard = (cards) => {
     popupImageText.textContent = cards.name;
     openPopup(popupImage);
   };
+
   newImage.addEventListener("click", zoomImage);
 
   return newElementCard;
@@ -151,10 +185,81 @@ initialCards.forEach((cards) => {
 
 formAdd.addEventListener("submit", (event) => {
   event.preventDefault();
-  // const name = document.querySelector("#UserName");
-  // const image = document.querySelector("#linkImg");
   const cards = { name: name.value, link: image.value };
+
   closePopup(popupAdd);
+  // closePopup(avatarPopup);
   renderElementCard(elements, cards);
   event.target.reset();
 });
+
+//--- попап инпут---
+// Функция, которая добавляет класс с ошибкой
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add("form__input_type_error");
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add("form__input-error_active");
+};
+
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove("form__input_type_error");
+  errorElement.classList.remove("form__input-error_active");
+  errorElement.textContent = "";
+};
+
+// Функция, которая проверяет валидность поля
+const isValid = (formElement, inputElement) => {
+  if (inputElement.validity.patternMismatch) {
+    inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+  } else {
+    inputElement.setCustomValidity("");
+  }
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(".form__input"));
+  const buttonElement = formElement.querySelector(".form__save-button");
+  toggleButtonState(inputList, buttonElement);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", () => {
+      isValid(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+};
+
+function hasInvalidInput(inputList) {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.disabled = true;
+    buttonElement.classList.add("form__button_inactive");
+  } else {
+    // кнопку активной
+    buttonElement.disabled = false;
+    buttonElement.classList.remove("form__button_inactive");
+  }
+};
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll(".form"));
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement);
+  });
+};
+enableValidation();

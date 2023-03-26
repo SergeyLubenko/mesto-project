@@ -7,6 +7,15 @@
   line-height: 17px;
   padding-bottom: 10px;
   padding-top: 30px;
+  width: 358px;
+}
+
+.form__input:focus {
+  outline-color: #000;
+}
+
+.form__input:first-child {
+  margin-top: 0;
 }
 
 @media screen and (max-width: 767px) {
