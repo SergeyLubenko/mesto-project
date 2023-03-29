@@ -1,3 +1,5 @@
+// import initialCards from "../src/components/cards.js";
+
 const profilePopup = document.querySelector("#edit");
 
 // const popup = document.querySelector(".popup");
@@ -31,12 +33,19 @@ const popupAvatar = document.querySelector(".popup_avatar");
 const avatarPopup = document.querySelector(".popup_avatar");
 const avatarSubmitButton = document.querySelector(".form__save-button");
 const inputAvatar = document.querySelector(".form__input-avatar");
-const profileAvatar = document.querySelector(".profile__avatar-container");
+const formAvatar = document.querySelector(".form__avatar");
+const profileAvatar = document.querySelector(".profile__avatar");
 
-// открыетие нового аватара
+// добавление авы
 avatarButton.addEventListener("click", function () {
   openPopup(popupAvatar);
+});
+
+formAvatar.addEventListener("submit", (event) => {
+  event.preventDefault();
   profileAvatar.src = inputAvatar.value;
+  closePopup(popupAvatar);
+  event.target.reset();
 });
 
 // функция открыть попап
@@ -89,33 +98,6 @@ document.querySelectorAll(".popup__close-icon").forEach(function (button) {
     }
   });
 });
-
-const initialCards = [
-  {
-    name: "Калифорния",
-    link: "https://images.unsplash.com/photo-1677629322685-bb7786037ec2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMjB8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80",
-  },
-  {
-    name: "Австралия",
-    link: "https://images.unsplash.com/photo-1677833229604-38c9d9ebc643?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMzd8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80",
-  },
-  {
-    name: "Порт",
-    link: "https://images.unsplash.com/photo-1677679656900-9cb5f7c88a98?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNTZ8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80",
-  },
-  {
-    name: "Мост",
-    link: "https://images.unsplash.com/photo-1677662375194-e5157a8e09b9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNDR8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80",
-  },
-  {
-    name: "Бали",
-    link: "https://images.unsplash.com/photo-1677709678802-529eb9305e9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNDh8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80",
-  },
-  {
-    name: "Серфинг",
-    link: "https://images.unsplash.com/photo-1677709679024-fc005fb4feb2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMDF8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80",
-  },
-];
 
 // Переменные для карточек
 
@@ -188,78 +170,7 @@ formAdd.addEventListener("submit", (event) => {
   const cards = { name: name.value, link: image.value };
 
   closePopup(popupAdd);
-  // closePopup(avatarPopup);
+
   renderElementCard(elements, cards);
   event.target.reset();
 });
-
-//--- попап инпут---
-// Функция, которая добавляет класс с ошибкой
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add("form__input_type_error");
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add("form__input-error_active");
-};
-
-// Функция, которая удаляет класс с ошибкой
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove("form__input_type_error");
-  errorElement.classList.remove("form__input-error_active");
-  errorElement.textContent = "";
-};
-
-// Функция, которая проверяет валидность поля
-const isValid = (formElement, inputElement) => {
-  if (inputElement.validity.patternMismatch) {
-    inputElement.setCustomValidity(inputElement.dataset.errorMessage);
-  } else {
-    inputElement.setCustomValidity("");
-  }
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(".form__input"));
-  const buttonElement = formElement.querySelector(".form__save-button");
-  toggleButtonState(inputList, buttonElement);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", () => {
-      isValid(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-};
-
-function hasInvalidInput(inputList) {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-}
-
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.disabled = true;
-    buttonElement.classList.add("form__button_inactive");
-  } else {
-    // кнопку активной
-    buttonElement.disabled = false;
-    buttonElement.classList.remove("form__button_inactive");
-  }
-};
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(".form"));
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-};
-enableValidation();

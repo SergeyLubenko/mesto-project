@@ -21,5 +21,6 @@
 @media screen and (max-width: 767px) {
   .form__input {
     padding-bottom: 10px;
+    width: 258px;
   }
 }
