@@ -1,5 +1,5 @@
 // добавление авы
-import { openPopup, closePopup } from "../utils.js";
+import { openPopup, closePopup } from "./utils.js";
 import { renderElementCard } from "../components/cards.js";
 
 const popupEdit = document.querySelector(".popup_edit");

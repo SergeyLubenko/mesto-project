@@ -1,4 +1,4 @@
-import { openPopup } from "../utils.js";
+import { openPopup } from "./utils.js";
 
 export const initialCards = [
   {
