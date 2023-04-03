@@ -5,12 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mesto</title>
-    <link rel="stylesheet" href="./pages/index.css" />
+    <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
   </head>
   <body class="page">
     <!-- header start -->
     <header class="header">
-      <img class="header__logo" src="./images/Vector.svg" alt="Лого" />
+      <img
+        class="header__logo"
+        src="<%=require('./images/Vector.svg')%>"
+        alt="Лого"
+      />
     </header>
     <!-- Жак-Ив Кусто Исследователь океана -->
     <!-- header end -->
@@ -21,14 +25,14 @@
           <div class="profile__avatar-container">
             <img
               class="profile__avatar"
-              src="./images/avatar.jpg"
+              src="<%=require('./images/avatar.jpg')%>"
               alt="Фото профиля"
             />
             <button
               type="submit"
               class="profile__avatar-button"
               id="avatar-button"
-              aria-label="изменить аватар"
+              aria-label="изменить аву"
             ></button>
           </div>
           <div class="profile__info">
@@ -67,11 +71,7 @@
     <!--Попап редактирования профиля-->
     <section class="popup popup_edit" id="popup-profile">
       <div class="popup__container">
-        <button
-          class="popup__close-icon"
-          type="button"
-          aria-label="Закрытие"
-        ></button>
+        <button class="popup__close-icon" type="button"></button>
         <h2 class="form__text">Редактировать профиль</h2>
         <form class="form popup__form" name="form__profile" novalidate>
           <fieldset class="form__info form__about" id="form-edit">
@@ -84,8 +84,6 @@
               placeholder="Жак-Ив Кусто"
               minlength="2"
               maxlength="40"
-              pattern="^[a-zA-Zа-яёА-ЯЁ\s-]+$"
-              data-error-message="Разрешены только латинские и кириллические буквы"
               required
             />
             <span class="form__input-error name-error"></span>
@@ -98,8 +96,6 @@
               placeholder="Исследователь океана"
               minlength="2"
               maxlength="200"
-              pattern="^[a-zA-Zа-яёА-ЯЁ\s-]+$"
-              data-error-message="Разрешены только латинские и кириллические буквы"
               required
             />
             <span class="form__input-error about-error"></span>
@@ -110,8 +106,6 @@
     </section>
 
     <!-- новое место -->
-    <!-- id="UserName"
-    id="linkImg" -->
     <section class="popup popup_add" id="popup-picture">
       <div class="popup__container">
         <button class="popup__close-icon" type="button"></button>
@@ -126,7 +120,7 @@
               value=""
               placeholder="Название"
               minlength="2"
-              maxlength="30"
+              maxlength="60"
               required
             />
             <span class="form__input-error title-error"></span>
@@ -154,28 +148,24 @@
           type="button"
           class="popup__close-icon"
         ></button>
-        <form name="ava" class="form form__avatar" id="avatar-form" novalidate>
+        <form
+          name="avatar"
+          class="form form__avatar"
+          id="avatar-form"
+          novalidate
+        >
           <h2 class="form__text">Обновить аватар</h2>
           <label class="form__field">
             <input
               name="avatar"
               class="form__input form__input-avatar"
               id="avatar-input"
-              type="url"
               placeholder="Ссылка на аватар"
               required
             />
-
             <span class="form__input-error avatar-input-error"></span>
           </label>
-
-          <button
-            type="submit"
-            class="form__save-button"
-            id="avatar-button-save"
-          >
-            Сохранить
-          </button>
+          <button type="submit" class="form__save-button">Сохранить</button>
         </form>
       </div>
     </div>
@@ -193,7 +183,7 @@
       </div>
     </div>
 
-    <script src="scripts/index.js"></script>
+    <!-- <script src="./scripts/index.js" type="module"></script> -->
     <!-- <script src="scripts/cards.js"></script> -->
   </body>
 </html>
