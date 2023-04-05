@@ -1,30 +1,14 @@
+
+import {closeByEsc} from "./index.js";
+
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closeByEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closeByEsc);
 }
-// закрытие на еверлайн
-document.addEventListener("click", function (evt) {
-  if (evt.target.classList.remove("popup_opened")) {
-    closePopup(popup);
-  }
-});
 
-// закрытие нв esc
-document.querySelectorAll(".popup__close-icon").forEach(function (button) {
-  const popup = button.closest(".popup");
-  document.addEventListener("keydown", function (evt) {
-    if (evt.key === "Escape") {
-      closePopup(popup);
-    }
-  });
-});
-
-document.querySelectorAll(".popup__close-icon").forEach((button) => {
-  const buttonsPopup = button.closest(".popup");
-  button.addEventListener("click", () => closePopup(buttonsPopup));
-});
-
-export { openPopup, closePopup };
+export { openPopup, closePopup};

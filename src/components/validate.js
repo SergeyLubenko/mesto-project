@@ -1,6 +1,5 @@
-//--- попап инпут---
+// --- попап инпут---
 // Функция, которая добавляет класс с ошибкой
-
 export const enableValidation = (object) => {
   const formList = Array.from(document.querySelectorAll(object.formSelector));
   formList.forEach((formElement) => {
@@ -27,11 +26,6 @@ const hideInputError = (formElement, inputElement, object) => {
 
 // Функция, которая проверяет валидность поля
 const isValid = (formElement, inputElement, object) => {
-  if (inputElement.validity.patternMismatch) {
-    inputElement.setCustomValidity(inputElement.dataset.errorMessage);
-  } else {
-    inputElement.setCustomValidity("");
-  }
   if (!inputElement.validity.valid) {
     showInputError(
       formElement,
@@ -48,12 +42,16 @@ const setEventListeners = (formElement, object) => {
   const inputList = Array.from(
     formElement.querySelectorAll(object.inputSelector)
   );
-
   const buttonElement = formElement.querySelector(object.submitButtonSelector);
   toggleButtonState(inputList, buttonElement, object);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       isValid(formElement, inputElement, object);
+      toggleButtonState(inputList, buttonElement, object);
+    });
+  });
+  formElement.addEventListener("reset", () => {
+    setInterval(() => {
       toggleButtonState(inputList, buttonElement, object);
     });
   });
