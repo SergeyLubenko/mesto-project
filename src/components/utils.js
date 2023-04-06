@@ -1,6 +1,3 @@
-
-import {closeByEsc} from "./index.js";
-
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closeByEsc);
@@ -11,4 +8,11 @@ function closePopup(popup) {
   document.removeEventListener("keydown", closeByEsc);
 }
 
-export { openPopup, closePopup};
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
+}
+
+export { openPopup, closePopup };

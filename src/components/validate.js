@@ -51,7 +51,7 @@ const setEventListeners = (formElement, object) => {
     });
   });
   formElement.addEventListener("reset", () => {
-    setInterval(() => {
+    setTimeout(() => {
       toggleButtonState(inputList, buttonElement, object);
     });
   });

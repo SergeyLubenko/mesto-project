@@ -10,7 +10,7 @@ import {
   handleOpenAdd,
 } from "./modal.js";
 
-import { closePopup } from "./utils";
+import { closePopup } from "./utils.js";
 
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
@@ -18,23 +18,24 @@ const avatarButton = document.querySelector(".profile__avatar-button");
 const elements = document.querySelector(".elements__grid");
 
 // overlay
-addEventListener("click", function (evt) {
-  if (evt.target.classList.remove("popup_opened")) {
-    closePopup(popup);
-  }
+const popups = document.querySelectorAll(".popup");
+
+popups.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup_opened")) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains(".popup__close-icon")) {
+      closePopup(popup);
+    }
+  });
 });
+
 document.querySelectorAll(".popup__close-icon").forEach((button) => {
   const popup = button.closest(".popup");
   button.addEventListener("click", () => closePopup(popup));
 });
-//
-// esc
-export function closeByEsc(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_opened");
-    closePopup(openedPopup);
-  }
-}
+
 avatarButton.addEventListener("click", function () {
   handleOpenAvatar();
 });
