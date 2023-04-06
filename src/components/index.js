@@ -17,23 +17,17 @@ const addButton = document.querySelector(".profile__add-button");
 const avatarButton = document.querySelector(".profile__avatar-button");
 const elements = document.querySelector(".elements__grid");
 
-// overlay
-const popups = document.querySelectorAll(".popup");
+const popup = document.querySelectorAll(".popup");
 
-popups.forEach((popup) => {
+popup.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup_opened")) {
       closePopup(popup);
     }
-    if (evt.target.classList.contains(".popup__close-icon")) {
+    if (evt.target.classList.contains("popup__close-icon")) {
       closePopup(popup);
     }
   });
-});
-
-document.querySelectorAll(".popup__close-icon").forEach((button) => {
-  const popup = button.closest(".popup");
-  button.addEventListener("click", () => closePopup(popup));
 });
 
 avatarButton.addEventListener("click", function () {
