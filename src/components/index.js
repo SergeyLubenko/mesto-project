@@ -17,9 +17,9 @@ const addButton = document.querySelector(".profile__add-button");
 const avatarButton = document.querySelector(".profile__avatar-button");
 const elements = document.querySelector(".elements__grid");
 
-const popup = document.querySelectorAll(".popup");
+const popups = document.querySelectorAll(".popup");
 
-popup.forEach((popup) => {
+popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup_opened")) {
       closePopup(popup);
