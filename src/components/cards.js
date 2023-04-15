@@ -1,78 +1,81 @@
 import { openPopup } from "./utils.js";
 
-export const initialCards = [
-  {
-    name: "Калифорния",
-    link: "https://images.unsplash.com/photo-1677629322685-bb7786037ec2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMjB8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80",
-  },
-  {
-    name: "Австралия",
-    link: "https://images.unsplash.com/photo-1677833229604-38c9d9ebc643?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMzd8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80",
-  },
-  {
-    name: "Порт",
-    link: "https://images.unsplash.com/photo-1677679656900-9cb5f7c88a98?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNTZ8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80",
-  },
-  {
-    name: "Мост",
-    link: "https://images.unsplash.com/photo-1677662375194-e5157a8e09b9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNDR8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80",
-  },
-  {
-    name: "Бали",
-    link: "https://images.unsplash.com/photo-1677709678802-529eb9305e9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNDh8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80",
-  },
-  {
-    name: "Серфинг",
-    link: "https://images.unsplash.com/photo-1677709679024-fc005fb4feb2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMDF8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80",
-  },
-];
+import { deleteCard, addLike, deleteLike } from "./api.js";
 
 const template = document.querySelector("#template");
 const popupImage = document.querySelector(".popup-image");
 const popupImageZoom = document.querySelector(".popup-image__zoom");
 const popupImageText = document.querySelector(".popup-image__text");
 
-const addElementCard = (cards) => {
+function addElementCard(cards, userId) {
   const newElementCard = template.content.cloneNode(true);
-  const newTitle = newElementCard.querySelector(".element__title");
   const newImage = newElementCard.querySelector(".element__img");
-
-  // Добавили картинку
-
-  newTitle.textContent = cards.name;
+  const buttonDelete = newElementCard.querySelector(".element__delete-button");
+  const elementLikeButton = newElementCard.querySelector(".element__like");
+  const elementCounterLike = newElementCard.querySelector(".element__like-counter");
+  // const newTitle = newElementCard.querySelector(".element__title");
   newImage.src = cards.link;
   newImage.alt = cards.name;
-
-  // лайк
-
-  const elementLike = newElementCard.querySelector(".element__like");
-  elementLike.addEventListener("click", () => {
-    elementLike.classList.toggle("element_like_button-active");
+  newElementCard.querySelector(".element__title").textContent = cards.name;
+  if (userId !== cards.owner._id) {
+    buttonDelete.classList.add("element__delet-button-inactive");
+  }
+  buttonDelete.addEventListener("click", (evt) => {
+    deleteCard(cards._id)
+      .then(() => {
+        deleteCards(evt);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+  elementCounterLike.textContent = cards.likes.length;
+  cards.likes.forEach(() => {
+    if (cards.likes._id === userId) {
+      elementLikeButton.classList.add("element_like_button-active");
+    }
   });
 
-  const deleteCardButton = newElementCard.querySelector(
-    ".element__delete-button"
-  );
+  elementLikeButton.addEventListener("click", (evt) => {
+    if (!evt.target.classList.contains("element_like_button-active")) {
+      addLike(cards._id)
+        .then((data) => {
+          activeHeart(evt);
+          elementCounterLike.textContent = data.likes.length;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      deleteLike(cards._id)
+        .then((data) => {
+          activeHeart(evt);
+          elementCounterLike.textContent = data.likes.length;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
 
-  const deleteCard = (event) => {
-    event.target.closest(".element").remove();
-  };
-
-  deleteCardButton.addEventListener("click", deleteCard);
-
-  // Открываем попав imageZoom+название
-
-  const zoomImage = () => {
-    popupImageZoom.src = cards.link;
-    popupImageZoom.alt = cards.name;
-    popupImageText.textContent = cards.name;
+  const zoomImage = (evt) => {
+    popupImageZoom.src = evt.target.src;
+    popupImageZoom.alt = evt.target.alt;
+    popupImageText.textContent = evt.target.alt;
     openPopup(popupImage);
   };
 
   newImage.addEventListener("click", zoomImage);
-
   return newElementCard;
+}
+
+function activeHeart(evt) {
+  evt.target.classList.toggle("element_like_button-active");
+}
+const deleteCards = (event) => {
+  event.target.closest(".element").remove();
 };
+export { addElementCard };
 
 // // Добавление названия в карточку
 export const renderElementCard = (section, item) => {
