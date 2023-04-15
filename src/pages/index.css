@@ -10,8 +10,6 @@
 @import url(../blocks/element/__delete-button/element__delete-button.css);
 @import url(../blocks/elements/elements__grid.css);
 @import url(../blocks/element/__like-counter/element__like-counter.css);
-@import url(../blocks/element/__like-container/elements__like-container.css);
-
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__name/footer__name.css);

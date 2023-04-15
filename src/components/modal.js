@@ -42,12 +42,12 @@ export function handleOpenAvatar() {
 }
 
 const saveLoading = (
-  isLoading,
+  saveLoading,
   button,
   buttonText = "Сохранить",
   loadingText = "Сохранение..."
 ) => {
-  if (isLoading) {
+  if (saveLoading) {
     button.textContent = loadingText;
   } else {
     button.textContent = buttonText;
