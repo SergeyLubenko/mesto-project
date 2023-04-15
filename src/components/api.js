@@ -1,5 +1,3 @@
-// import { checkResponse } from "./utils";
-
 const config = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-22",
   headers: {
@@ -15,7 +13,7 @@ function checkResponse(res) {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-function request(url, options){
+function request(url, options) {
   return fetch(url, options).then((res) => checkResponse(res));
 }
 
@@ -31,7 +29,7 @@ const getInCards = () => {
   });
 };
 
-const ProfileContent = (profileTitle, profileSubtitle) => {
+const saveProfileContent = (profileTitle, profileSubtitle) => {
   return request(`${config.baseUrl}/users/me`, {
     method: "PATCH",
     headers: config.headers,
@@ -74,7 +72,7 @@ const deleteLike = (cardId) => {
   });
 };
 
-const  addNewAvatar = (avatar) => {
+const addNewAvatar = (avatar) => {
   return request(`${config.baseUrl}/users/me/avatar`, {
     method: "PATCH",
     headers: config.headers,
@@ -87,7 +85,7 @@ const  addNewAvatar = (avatar) => {
 export {
   getProfileContent,
   getInCards,
-  ProfileContent,
+  saveProfileContent,
   newCard,
   deleteCard,
   addLike,

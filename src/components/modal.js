@@ -1,10 +1,10 @@
 import { openPopup, closePopup } from "./utils.js";
-// import { renderElementCard } from "../components/cards.js";
+
 
 import { addElementCard } from "./cards.js";
 
 import {
-  ProfileContent,
+  saveProfileContent,
   newCard,
   addNewAvatar,
   getUsersData,
@@ -58,7 +58,7 @@ const saveLoading = (
 function handleProfileFormSubmit(events) {
   events.preventDefault();
   saveLoading(true, buttonSubmitProfile);
-  ProfileContent(formInputName.value, formInputSearch.value)
+  saveProfileContent(formInputName.value, formInputSearch.value)
     .then((res) => {
       profileTitle.textContent = res.name;
       profileSubtitle.textContent = res.about;
@@ -129,4 +129,4 @@ export function handleOpenAdd() {
 }
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
-// export { checkResponse };
+
