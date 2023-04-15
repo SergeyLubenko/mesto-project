@@ -12,7 +12,9 @@ function addElementCard(cards, userId) {
   const newImage = newElementCard.querySelector(".element__img");
   const buttonDelete = newElementCard.querySelector(".element__delete-button");
   const elementLikeButton = newElementCard.querySelector(".element__like");
-  const elementCounterLike = newElementCard.querySelector(".element__like-counter");
+  const elementCounterLike = newElementCard.querySelector(
+    ".element__like-counter"
+  );
   // const newTitle = newElementCard.querySelector(".element__title");
   newImage.src = cards.link;
   newImage.alt = cards.name;
@@ -70,7 +72,7 @@ function addElementCard(cards, userId) {
 }
 
 function activeHeart(evt) {
-  evt.target.classList.toggle("element_like_button-active");
+  evt.target.classList.add("element_like_button-active");
 }
 const deleteCards = (event) => {
   event.target.closest(".element").remove();
