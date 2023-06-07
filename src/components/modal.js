@@ -1,7 +1,6 @@
 import { openPopup, closePopup } from "./utils.js";
 
-
-import { addElementCard } from "./cards.js";
+import { addElementCard } from "./Card.js";
 
 import {
   saveProfileContent,
@@ -9,13 +8,13 @@ import {
   addNewAvatar,
   getUsersData,
   getCards,
-} from "./api.js";
+} from "./Api.js";
+
+import { formInputName, formInputSearch } from "/utils/constants.js";
 
 const popupEdit = document.querySelector(".popup_edit");
 
 const profileForm = popupEdit.querySelector(".popup__form");
-const formInputName = profileForm.querySelector(".form__input_name");
-const formInputSearch = profileForm.querySelector(".form__input_search");
 
 const buttonSubmitProfile = document.querySelector(".form__save-button");
 const profile = document.querySelector(".profile");
@@ -29,8 +28,7 @@ const formAdd = document.querySelector(".form-add");
 const popupAdd = document.querySelector(".popup_add");
 const inputName = formAdd.querySelector(".form__input_name");
 const inputSerch = formAdd.querySelector(".form__input_search");
-const image = document.querySelector("#link");
-const name = document.querySelector("#title");
+
 const elements = document.querySelector(".elements__grid");
 
 const profileTitle = document.querySelector(".profile__title");
@@ -80,7 +78,7 @@ function handleAvatarFormSubmit(event) {
     .then((res) => {
       profileAvatar.src = res.avatar;
       closePopup(popupAvatar);
-      evt.target.reset();
+      event.target.reset();
     })
     .catch((err) => {
       console.log(err);
@@ -104,10 +102,7 @@ function handleAddSubmit(event) {
       elements.prepend(addElementCard(card, profile));
       closePopup(popupAdd);
       event.target.reset();
-      // const cards = { name: name.value, link: image.value };
-      closePopup(popupAdd);
-      // renderElementCard(elements, cards);
-      // event.target.reset();
+      
     })
     .catch((err) => {
       console.log(err);
@@ -128,5 +123,3 @@ export function handleOpenAdd() {
   openPopup(popupAdd);
 }
 profileForm.addEventListener("submit", handleProfileFormSubmit);
-
-

@@ -1,6 +1,6 @@
 import { openPopup } from "./utils.js";
 
-import { deleteCard, addLike, deleteLike } from "./api.js";
+import { deleteCard, addLike, deleteLike } from "./Api.js";
 
 const template = document.querySelector("#template");
 const popupImage = document.querySelector(".popup-image");
@@ -15,7 +15,6 @@ function addElementCard(cards, userId) {
   const elementCounterLike = newElementCard.querySelector(
     ".element__like-counter"
   );
-  // const newTitle = newElementCard.querySelector(".element__title");
   newImage.src = cards.link;
   newImage.alt = cards.name;
   newElementCard.querySelector(".element__title").textContent = cards.name;

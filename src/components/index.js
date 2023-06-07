@@ -2,7 +2,7 @@
 //
 //
 import "../pages/index.css";
-import { renderElementCard, addElementCard } from "./cards.js";
+import { addElementCard } from "./Card.js";
 import { enableValidation } from "./validate.js";
 import {
   handleOpenPopupEdit,
@@ -10,19 +10,16 @@ import {
   handleOpenAdd,
 } from "./modal.js";
 
+import {
+  editButton,
+  addButton,
+  profileAvatarButton,
+} from "/utils/constants.js";
+
 import { closePopup } from "./utils.js";
 
-import {
-  // passProfileDate,
-  // passNewCard,
-  // addAvatar,
-  getProfileContent,
-  getInCards,
-} from "./api.js";
+import { getProfileContent, getInCards } from "./Api.js";
 
-const editButton = document.querySelector(".profile__edit-button");
-const addButton = document.querySelector(".profile__add-button");
-const avatarButton = document.querySelector(".profile__avatar-button");
 const elements = document.querySelector(".elements__grid");
 
 const popups = document.querySelectorAll(".popup");
@@ -58,7 +55,7 @@ popups.forEach((popup) => {
   });
 });
 
-avatarButton.addEventListener("click", function () {
+profileAvatarButton.addEventListener("click", function () {
   handleOpenAvatar();
 });
 
@@ -70,9 +67,6 @@ addButton.addEventListener("click", function () {
   handleOpenAdd();
 });
 
-// initialCards.forEach((cards) => {
-//   renderElementCard(elements, cards);
-// });
 
 enableValidation({
   formSelector: ".form",

@@ -70,3 +70,5 @@ const toggleButtonState = (inputList, buttonElement, object) => {
     buttonElement.classList.remove(object.inactiveButtonClass);
   }
 };
+
+
