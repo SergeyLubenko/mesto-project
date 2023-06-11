@@ -16,9 +16,7 @@
         alt="Лого"
       />
     </header>
-    <!-- Жак-Ив Кусто Исследователь океана -->
-    <!-- header end -->
-    <!-- profile start -->
+  
     <main>
       <section class="profile">
         <div class="profile__user">
@@ -31,21 +29,23 @@
             <button
               type="submit"
               class="profile__avatar-button"
-              id="avatar-button"
               aria-label="изменить аву"
             ></button>
           </div>
           <div class="profile__info">
             <div class="profile__name">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <button type="submit" class="profile__edit-button"></button>
+              <button type="button" class="profile__edit-button"></button>
             </div>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
         </div>
+
         <button type="button" class="profile__add-button"></button>
       </section>
     </main>
+
+    
     <section>
       <ul class="elements__grid"></ul>
     </section>
@@ -69,12 +69,12 @@
     </template>
 
     <!--Попап редактирования профиля-->
-    <section class="popup popup_edit" id="popup-profile">
+    <section class="popup popup_edit">
       <div class="popup__container">
         <button class="popup__close-icon" type="button"></button>
         <h2 class="form__text">Редактировать профиль</h2>
-        <form class="form popup__form" name="form__profile" novalidate>
-          <fieldset class="form__info form__about" id="form-edit">
+        <form class="form popup__form" name="edit-profile" novalidate>
+          <fieldset  class="form__info form__about" id="form-edit">
             <input
               class="form__input form__input_name"
               id="name"
@@ -106,7 +106,7 @@
     </section>
 
     <!-- новое место -->
-    <section class="popup popup_add" id="popup-picture">
+    <section class="popup popup_add">
       <div class="popup__container">
         <button class="popup__close-icon" type="button"></button>
         <form class="form-add form" name="form__profile" novalidate>
@@ -116,7 +116,7 @@
               class="form__input form__input_name"
               id="title"
               type="text"
-              name="picture"
+              name="input_name"
               value=""
               placeholder="Название"
               minlength="2"
@@ -128,7 +128,7 @@
               class="form__input form__input_search"
               type="url"
               id="link"
-              name="link"
+              name="input_search"
               value=""
               placeholder="Ссылка на картинку"
               required
@@ -141,7 +141,7 @@
       </div>
     </section>
 
-    <div class="popup popup_avatar" id="popup-avatar">
+    <div class="popup popup_avatar">
       <div class="popup__container">
         <button
           id="avatar-close-button"
@@ -151,7 +151,7 @@
         <form
           name="avatar"
           class="form form__avatar"
-          id="avatar-form"
+         
           novalidate
         >
           <h2 class="form__text">Обновить аватар</h2>
