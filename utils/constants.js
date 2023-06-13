@@ -19,14 +19,20 @@ const profileSelectors = {
   profileAvatar: ".profile__avatar",
 };
 
-// const enableValidation = {
-//   formSelector: ".form",
-//   inputSelector: ".form__input",
-//   submitButtonSelector: ".form__save-button",
-//   inactiveButtonClass: "form__button_inactive",
-//   inputErrorClass: "form__input_type_error",
-//   errorClass: "form__input-error_active",
-// };
+const enableValidation = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__save-button",
+  inactiveButtonClass: "form__button_inactive",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+};
+const formSelectors = {
+  formPopup: ".popup__form",
+  formAdd: ".form-add",
+  formAvatar: ".form__avatar",
+};
+
 
 export {
   config,
@@ -36,4 +42,6 @@ export {
   profileAvatarButton,
   formInputName,
   formInputSearch,
+  enableValidation,
+  formSelectors,
 };

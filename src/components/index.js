@@ -5,6 +5,7 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import FormValidator from "../components/FormValidator.js";
 
 import {
   config,
@@ -14,10 +15,26 @@ import {
   profileAvatarButton,
   formInputName,
   formInputSearch,
+  enableValidation,
+  formSelectors,
 } from "/utils/constants.js";
 
-
 const api = new Api(config);
+
+const editProfile = new FormValidator(
+  enableValidation,
+  formSelectors.formPopup
+);
+editProfile.enableValidation();
+
+const addCardForm = new FormValidator(enableValidation, formSelectors.formAdd);
+addCardForm.enableValidation();
+
+const editAvatarForm = new FormValidator(
+  enableValidation,
+  formSelectors.formAvatar
+);
+editAvatarForm.enableValidation();
 
 api
   .AddInfo()
@@ -162,10 +179,12 @@ editButton.addEventListener("click", () => {
 });
 
 addButton.addEventListener("click", () => {
+  addCardForm.resetValidation();
   popupAddCard.open();
 });
 
 profileAvatarButton.addEventListener("click", () => {
+  editAvatarForm.resetValidation();
   popupEditAvatar.open();
 });
 
@@ -181,8 +200,6 @@ const saveLoading = (
     button.textContent = loadingText;
   }
 };
-
-
 
 // enableValidation({
 //   formSelector: ".form",
