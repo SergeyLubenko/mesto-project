@@ -1,4 +1,3 @@
-// форма валидации остается за Максимом Трофимовым
 export default class FormValidator {
     constructor(data, form) {
       this._formElement = document.querySelector(`${form}`);
