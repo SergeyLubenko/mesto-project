@@ -11,7 +11,7 @@ export default class Api {
   }
 
   // добавление данных профиля и карточек
-  AddInfo() {
+  getAddInfo() {
     return Promise.all([this._getProfileContent(), this._getInCards()]);
   }
 

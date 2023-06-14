@@ -5,13 +5,11 @@ const config = {
     "Content-Type": "application/json",
   },
 };
-const editButton = document.querySelector(".profile__edit-button");
-const addButton = document.querySelector(".profile__add-button");
+const profileEditButton = document.querySelector(".profile__edit-button");
+const profileAddButton = document.querySelector(".profile__add-button");
 const formInputName = document.querySelector(".form__input_name");
 const formInputSearch = document.querySelector(".form__input_search");
 const profileAvatarButton = document.querySelector(".profile__avatar-button");
-
-
 
 const profileSelectors = {
   profileTitle: ".profile__title",
@@ -33,12 +31,11 @@ const formSelectors = {
   formAvatar: ".form__avatar",
 };
 
-
 export {
   config,
   profileSelectors,
-  editButton,
-  addButton,
+  profileEditButton,
+  profileAddButton,
   profileAvatarButton,
   formInputName,
   formInputSearch,

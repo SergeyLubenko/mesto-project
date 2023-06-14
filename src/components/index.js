@@ -10,8 +10,8 @@ import FormValidator from "../components/FormValidator.js";
 import {
   config,
   profileSelectors,
-  editButton,
-  addButton,
+  profileEditButton,
+  profileAddButton,
   profileAvatarButton,
   formInputName,
   formInputSearch,
@@ -21,11 +21,11 @@ import {
 
 const api = new Api(config);
 
-const editProfile = new FormValidator(
+const profileFormValidator = new FormValidator(
   enableValidation,
   formSelectors.formPopup
 );
-editProfile.enableValidation();
+profileFormValidator.enableValidation();
 
 const addCardForm = new FormValidator(enableValidation, formSelectors.formAdd);
 addCardForm.enableValidation();
@@ -37,7 +37,7 @@ const editAvatarForm = new FormValidator(
 editAvatarForm.enableValidation();
 
 api
-  .AddInfo()
+  .getAddInfo()
   .then(([user, cards]) => {
     userInfo.setUserInfo(user);
     cardList.renderItems(cards, user);
@@ -50,7 +50,7 @@ function handleCardClick(card) {
   popupImage.open(card);
 }
 
-function handlerDeleteСard(card) {
+function handlerDeleteCard(card) {
   api
     .deleteCard(card.getCardId())
     .then(() => {
@@ -66,7 +66,7 @@ function handlerLike(card) {
     api
       .addLike(card.getCardId())
       .then((cardData) => {
-        card.dataLikes(cardData);
+        card.getdataLikes(cardData);
       })
       .catch((err) => {
         console.log(err, "ошибка");
@@ -75,7 +75,7 @@ function handlerLike(card) {
     api
       .deleteLike(card.getCardId())
       .then((cardData) => {
-        card.dataLikes(cardData);
+        card.getdataLikes(cardData);
       })
       .catch((err) => {
         console.log(err, "ошибка");
@@ -95,7 +95,7 @@ const cardList = new Section(
       const card = new Card({
         data: item,
         handleCardClick,
-        handlerDeleteСard,
+        handlerDeleteCard,
         handlerLike,
         selector: "#template",
         userId: userInfo.getUserInfo().userId,
@@ -170,7 +170,8 @@ popupEditAvatar.setEventListeners();
 popupEditProfile.setEventListeners();
 popupImage.setEventListeners();
 
-editButton.addEventListener("click", () => {
+profileEditButton.addEventListener("click", () => {
+  profileFormValidator.resetValidation();
   popupEditProfile.open();
 
   const infoUser = userInfo.getUserInfo();
@@ -178,7 +179,7 @@ editButton.addEventListener("click", () => {
   formInputSearch.value = infoUser.about;
 });
 
-addButton.addEventListener("click", () => {
+profileAddButton.addEventListener("click", () => {
   addCardForm.resetValidation();
   popupAddCard.open();
 });
@@ -200,12 +201,3 @@ const saveLoading = (
     button.textContent = loadingText;
   }
 };
-
-// enableValidation({
-//   formSelector: ".form",
-//   inputSelector: ".form__input",
-//   submitButtonSelector: ".form__save-button",
-//   inactiveButtonClass: "form__button_inactive",
-//   inputErrorClass: "form__input_type_error",
-//   errorClass: "form__input-error_active",
-// });

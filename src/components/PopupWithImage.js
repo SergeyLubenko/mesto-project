@@ -14,11 +14,3 @@ export default class PopupWithImage extends Popup {
     this._popupImageZoom.src = card.image;
   }
 }
-
-
-// const zoomImage = (evt) => {
-//   popupImageZoom.src = evt.target.src;
-//   popupImageZoom.alt = evt.target.alt;
-//   popupImageText.textContent = evt.target.alt;
-//   openPopup(popupImage);
-// };
