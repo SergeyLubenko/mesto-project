@@ -55,7 +55,7 @@ export default class Card {
   }
 
   // состояние лайка и счетчика
-  getdataLikes(cardData) {
+  setDataLikes(cardData) {
     this._likes = cardData.likes;
     this._addLikes();
   }

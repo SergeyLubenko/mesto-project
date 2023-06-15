@@ -40,7 +40,7 @@ api
   .getAddInfo()
   .then(([user, cards]) => {
     userInfo.setUserInfo(user);
-    cardList.renderItems(cards, user);
+    cardList.renderItems(cards.reverse());
   })
   .catch((err) => {
     console.log(err, "ошибка");
@@ -66,7 +66,7 @@ function handlerLike(card) {
     api
       .addLike(card.getCardId())
       .then((cardData) => {
-        card.getdataLikes(cardData);
+        card.setDataLikes(cardData);
       })
       .catch((err) => {
         console.log(err, "ошибка");
@@ -75,7 +75,7 @@ function handlerLike(card) {
     api
       .deleteLike(card.getCardId())
       .then((cardData) => {
-        card.getdataLikes(cardData);
+        card.setDataLikes(cardData);
       })
       .catch((err) => {
         console.log(err, "ошибка");
@@ -191,13 +191,14 @@ profileAvatarButton.addEventListener("click", () => {
 
 const saveLoading = (
   popupSelector,
-  loadingText = "Сохранить...",
-  buttonText = "Сохранение"
+  isLoading = false,
+  buttonText = "Сохранить",
+  loadingText = "Сохранение..."
 ) => {
   const button = document.querySelector(`${popupSelector} .form__save-button`);
-  if (popupSelector) {
-    button.textContent = buttonText;
-  } else {
+  if (isLoading) {
     button.textContent = loadingText;
+  } else {
+    button.textContent = buttonText;
   }
 };
