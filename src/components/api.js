@@ -1,94 +1,88 @@
-const config = {
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-22",
-  headers: {
-    authorization: "533adc04-bcba-4000-88a7-903fbfe5b6cf",
-    "Content-Type": "application/json",
-  },
-};
-
-function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
+export default class Api {
+  constructor(options) {
+    this._options = options;
   }
-  return Promise.reject(`Ошибка: ${res.status}`);
+
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
+  // добавление данных профиля и карточек
+  getAddInfo() {
+    return Promise.all([this._getProfileContent(), this._getInCards()]);
+  }
+
+  //  получение профиля с сервера
+  _getProfileContent() {
+    return fetch(`${this._options.baseUrl}/users/me`, {
+      headers: this._options.headers,
+    }).then(this._checkResponse);
+  }
+
+  // получение карточек с сервера
+  _getInCards() {
+    return fetch(`${this._options.baseUrl}/cards`, {
+      headers: this._options.headers,
+    }).then(this._checkResponse);
+  }
+
+  saveProfileContent(profileTitle, profileSubtitle) {
+    return fetch(`${this._options.baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._options.headers,
+      body: JSON.stringify({
+        name: profileTitle,
+        about: profileSubtitle,
+      }),
+    }).then(this._checkResponse);
+  }
+
+  // добавить карточки
+  newCard(name, link) {
+    return fetch(`${this._options.baseUrl}/cards`, {
+      method: "POST",
+      headers: this._options.headers,
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      }),
+    }).then(this._checkResponse);
+  }
+
+  // удалить карточку
+  deleteCard(cardId) {
+    return fetch(`${this._options.baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._options.headers,
+    }).then(this._checkResponse);
+  }
+
+  deleteLike(cardId) {
+    return fetch(`${this._options.baseUrl}/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: this._options.headers,
+    }).then(this._checkResponse);
+  }
+
+  // поставить лайк
+  addLike(cardId) {
+    return fetch(`${this._options.baseUrl}/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: this._options.headers,
+    }).then(this._checkResponse);
+  }
+
+  // редактирование аватара
+  addNewAvatar(avatar) {
+    return fetch(`${this._options.baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._options.headers,
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    }).then(this._checkResponse);
+  }
 }
-
-function request(url, options) {
-  return fetch(url, options).then((res) => checkResponse(res));
-}
-
-const getProfileContent = () => {
-  return request(`${config.baseUrl}/users/me`, {
-    headers: config.headers,
-  });
-};
-
-const getInCards = () => {
-  return request(`${config.baseUrl}/cards`, {
-    headers: config.headers,
-  });
-};
-
-const saveProfileContent = (profileTitle, profileSubtitle) => {
-  return request(`${config.baseUrl}/users/me`, {
-    method: "PATCH",
-    headers: config.headers,
-    body: JSON.stringify({
-      name: profileTitle,
-      about: profileSubtitle,
-    }),
-  });
-};
-
-const newCard = (name, link) => {
-  return request(`${config.baseUrl}/cards`, {
-    method: "POST",
-    headers: config.headers,
-    body: JSON.stringify({
-      name: name,
-      link: link,
-    }),
-  });
-};
-
-const deleteCard = (cardId) => {
-  return request(`${config.baseUrl}/cards/${cardId}`, {
-    method: "DELETE",
-    headers: config.headers,
-  });
-};
-
-const addLike = (cardId) => {
-  return request(`${config.baseUrl}/cards/likes/${cardId}`, {
-    method: "PUT",
-    headers: config.headers,
-  });
-};
-
-const deleteLike = (cardId) => {
-  return request(`${config.baseUrl}/cards/likes/${cardId}`, {
-    method: "DELETE",
-    headers: config.headers,
-  });
-};
-
-const addNewAvatar = (avatar) => {
-  return request(`${config.baseUrl}/users/me/avatar`, {
-    method: "PATCH",
-    headers: config.headers,
-    body: JSON.stringify({
-      avatar: avatar,
-    }),
-  });
-};
-
-export {
-  getProfileContent,
-  getInCards,
-  saveProfileContent,
-  newCard,
-  deleteCard,
-  addLike,
-  deleteLike,
-  addNewAvatar,
-};
