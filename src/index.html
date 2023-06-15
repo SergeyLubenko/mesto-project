@@ -16,7 +16,7 @@
         alt="Лого"
       />
     </header>
-  
+
     <main>
       <section class="profile">
         <div class="profile__user">
@@ -45,7 +45,6 @@
       </section>
     </main>
 
-    
     <section>
       <ul class="elements__grid"></ul>
     </section>
@@ -74,7 +73,7 @@
         <button class="popup__close-icon" type="button"></button>
         <h2 class="form__text">Редактировать профиль</h2>
         <form class="form popup__form" name="edit-profile" novalidate>
-          <fieldset  class="form__info form__about" id="form-edit">
+          <fieldset class="form__info form__about" id="form-edit">
             <input
               class="form__input form__input_name"
               id="name"
@@ -148,21 +147,18 @@
           type="button"
           class="popup__close-icon"
         ></button>
-        <form
-          name="avatar"
-          class="form form__avatar"
-         
-          novalidate
-        >
+        <form name="avatar" class="form form__avatar" novalidate>
           <h2 class="form__text">Обновить аватар</h2>
           <label class="form__field">
             <input
+              type="url"
               name="avatar"
               class="form__input form__input-avatar"
               id="avatar-input"
               placeholder="Ссылка на аватар"
               required
             />
+            <!-- <span class="form__input-error link-error"></span> -->
             <span class="form__input-error avatar-input-error"></span>
           </label>
           <button type="submit" class="form__save-button">Сохранить</button>
